@@ -10651,5 +10651,80 @@
       },
       "description": "Create an organization"
     }
+  },
+  "issueImport": {
+    "start": {
+      "url": "/repos/:owner/:repo/import/issues",
+      "method": "POST",
+      "headers": {
+        "accept": "application/vnd.github.golden-comet-preview"
+      },
+      "params": {
+        "owner": {
+          "type": "string",
+          "required": true
+        },
+        "repo": {
+          "type": "string",
+          "required": true
+        },
+        "issue": {
+          "type": "json",
+          "required": true,
+          "description": "JSON object containing issue detail, `title` and `body` are required string fields. Other supported fields are: `created_at`, `closed_at`, `updated_at`, `assignee`, `milestone`, `closed`, `labels`."
+        },
+        "comments": {
+          "type": "json[]",
+          "description": "Array of JSON objects representing coments. Required fields: `body`, permitted fields: `created_at`"
+        }
+      },
+      "description": "Imports an issue with comments. The issue and comment timestamps may use dates in the past. No notifications will be issued to mentioned users. (Preview API)"
+    },
+    "issueStatus": {
+      "url": "/repos/:owner/:repo/import/issues/:id",
+      "method": "GET",
+      "headers": {
+        "accept": "application/vnd.github.golden-comet-preview"
+      },
+      "params": {
+        "owner": {
+          "type": "string",
+          "required": true
+        },
+        "repo": {
+          "type": "string",
+          "required": true
+        },
+        "id": {
+          "type": "number",
+          "required": true,
+          "description": "ID of the issue import request. Note: this may differ from the created issue ID."
+        }
+      },
+      "description": "Retrieve import status for a previously submitted issue import."
+    },
+    "status": {
+      "url": "/repos/:owner/:repo/import/issues",
+      "method": "GET",
+      "headers": {
+        "accept": "application/vnd.github.golden-comet-preview"
+      },
+      "params": {
+        "owner": {
+          "type": "string",
+          "required": true
+        },
+        "repo": {
+          "type": "string",
+          "required": true
+        },
+        "since": {
+          "type": "string",
+          "description": "Timestamp to retrieve statuses of imports submitted since. (Date format is yyyy-mm-dd)",
+          "required": true
+        }
+      },
+      "description": "Check the status of issues imported since a date or date and time."
+    }
   }
 }
